@@ -1,0 +1,30 @@
+#test is_less_test
+    decimal src_value1 = {{17, 0, 0, 0}};
+    decimal src_value2 = {{5, 0, 0, 0}};
+    int result = is_less(src_value1, src_value2);
+    ck_assert_int_eq(result, 0);
+
+    decimal src_value3 = {{123456u, 123u, 0, 0}};
+    decimal src_value4 = {{654321u, 654u, 0, 0}};
+    set_scale(&src_value3, 10);
+    set_scale(&src_value4, 3);
+    result = is_less(src_value3, src_value4);
+    ck_assert_int_eq(result, 1);
+
+    decimal src_value5 = {{0xffff, 34, 0, 0}};
+    decimal src_value6 =  {{0xff, 0, 0, 0}};
+    set_scale(&src_value5, 3);
+    result = is_less(src_value5, src_value6);
+    ck_assert_int_eq(result, 0);
+
+    decimal src_value7 = {{0xffffffff, 0xffffffff, 0xffffffff, 0}};
+    decimal src_value8 =  {{0xffffffff, 0xffffffff, 0xffffffff, 0}};
+    set_sign(&src_value7, 1);
+    result = is_less(src_value7, src_value8);
+    ck_assert_int_eq(result, 1);
+
+    decimal src_value9 = {{0, 0, 0, 0}};
+    decimal src_value10 =  {{0, 0, 0, 0}};
+    set_scale(&src_value9, 3);
+    result = is_less(src_value9, src_value10);
+    ck_assert_int_eq(result, 0);

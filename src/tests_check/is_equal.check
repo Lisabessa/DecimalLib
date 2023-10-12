@@ -1,0 +1,16 @@
+#test is_equal_test
+    decimal src_value1 = {{17, 0, 0, 0}};
+    decimal src_value2 = {{5, 0, 0, 0}};
+    int result = is_equal(src_value1, src_value2);
+    ck_assert_int_eq(result, 0);
+
+    decimal src_value3 = {{17, 0, 0, 0}};
+    decimal src_value4 = {{17, 0, 0, 0}};
+    result = is_equal(src_value3, src_value4);
+    ck_assert_int_eq(result, 1);
+
+    decimal src_value5 = {{0, 0, 0, 0}};
+    decimal src_value6 =  {{0, 0, 0, 0}};
+    set_scale(&src_value6, 3);
+    result = is_equal(src_value5, src_value6);
+    ck_assert_int_eq(result, 1);

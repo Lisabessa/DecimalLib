@@ -1,0 +1,86 @@
+#test add_test
+    decimal src_value1 = {{18, 0, 0, 0}};
+    decimal src_value2 = {{5, 0, 0, 0}};
+    decimal res_value1 = {{0, 0, 0, 0}};
+    decimal answer1 = {{23, 0, 0, 0}};
+    int result = add(src_value1, src_value2, &res_value1);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(answer1.bits[0], res_value1.bits[0]);   
+    ck_assert_int_eq(answer1.bits[1], res_value1.bits[1]);   
+    ck_assert_int_eq(answer1.bits[2], res_value1.bits[2]);   
+    ck_assert_int_eq(answer1.bits[3], res_value1.bits[3]);
+
+    decimal src_value3 = {{123456u, 123u, 0, 0}};
+    decimal src_value4 = {{654321u, 654u, 0, 0}};
+    set_scale(&src_value3, 2);
+    set_scale(&src_value4, 3);
+    decimal res_value2 = {{0, 0, 0, 0}};
+    decimal answer2 = {{1888881, 1884, 0, 196608}};
+    result = add(src_value3, src_value4, &res_value2);
+    ck_assert_int_eq(result, 0);
+     
+    ck_assert_int_eq(answer2.bits[0], res_value2.bits[0]);   
+    ck_assert_int_eq(answer2.bits[1], res_value2.bits[1]);   
+    ck_assert_int_eq(answer2.bits[2], res_value2.bits[2]);  
+    ck_assert_int_eq(answer2.bits[3], res_value2.bits[3]);
+
+    decimal src_value5 = {{123456u, 123u, 0, 0}};
+    decimal src_value6 = {{654321u, 654u, 0, 0}};
+    set_scale(&src_value5, 2);
+    set_scale(&src_value6, 3);
+    set_sign(&src_value6, 1);
+    decimal res_value3 = {{0, 0, 0, 0}};
+    decimal answer3 = {{580239, 576, 0, 196608}};
+    result = add(src_value5, src_value6, &res_value3);
+    ck_assert_int_eq(result, 0);
+     
+    ck_assert_int_eq(answer3.bits[0], res_value3.bits[0]);   
+    ck_assert_int_eq(answer3.bits[1], res_value3.bits[1]);   
+    ck_assert_int_eq(answer3.bits[2], res_value3.bits[2]);  
+    ck_assert_int_eq(answer3.bits[3], res_value3.bits[3]);
+
+    decimal src_value7 = {{123456u, 123u, 0, 0}};
+    decimal src_value8 = {{654321u, 654u, 0, 0}};
+    set_scale(&src_value7, 2);
+    set_scale(&src_value8, 3);
+    set_sign(&src_value7, 1);
+    decimal res_value4 = {{0, 0, 0, 0}};
+    decimal answer4 = {{580239, 576, 0, -2147287040}};
+    result = add(src_value7, src_value8, &res_value4);
+    ck_assert_int_eq(result, 0);
+     
+    ck_assert_int_eq(answer4.bits[0], res_value4.bits[0]);   
+    ck_assert_int_eq(answer4.bits[1], res_value4.bits[1]);   
+    ck_assert_int_eq(answer4.bits[2], res_value4.bits[2]);  
+    ck_assert_int_eq(answer4.bits[3], res_value4.bits[3]);
+
+    decimal src_value9 = {{476735, 34, 0, 0}};
+    decimal src_value10 = {{0xff, 36546, 2234, 0}};
+    set_scale(&src_value9, 10);
+    set_scale(&src_value10, 20);
+    set_sign(&src_value9, 1);
+    decimal res_value5 = {{0, 0, 0, 0}};
+    decimal answer5 = {{-725949185, -698657056, 2154, 1310720}};
+    result = add(src_value9, src_value10, &res_value5);
+    ck_assert_int_eq(result, 0);
+     
+    ck_assert_int_eq(answer5.bits[0], res_value5.bits[0]);   
+    ck_assert_int_eq(answer5.bits[1], res_value5.bits[1]);   
+    ck_assert_int_eq(answer5.bits[2], res_value5.bits[2]);  
+    ck_assert_int_eq(answer5.bits[3], res_value5.bits[3]);
+
+    decimal src_value11 = {{230304, 310398, 0, 0}};
+    decimal src_value12 = {{230304, 310398, 0, 0}};
+    set_scale(&src_value11, 3);
+    set_scale(&src_value12, 3);
+    set_sign(&src_value12, 1);
+    decimal res_value6 = {{0, 0, 0, 0}};
+    decimal answer6 = {{0, 0, 0, 0}};
+    result = add(src_value11, src_value12, &res_value6);
+    ck_assert_int_eq(result, 0);
+     
+    ck_assert_int_eq(answer6.bits[0], res_value6.bits[0]);   
+    ck_assert_int_eq(answer6.bits[1], res_value6.bits[1]);   
+    ck_assert_int_eq(answer6.bits[2], res_value6.bits[2]);  
+    ck_assert_int_eq(answer6.bits[3], res_value6.bits[3]);
+

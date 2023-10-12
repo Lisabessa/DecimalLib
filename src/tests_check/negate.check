@@ -1,0 +1,22 @@
+#test negate_test
+    decimal src_value1 = {{0b111001, 0, 0, 0}};
+    decimal res_value1;
+    decimal answer1 = {{0b111001, 0, 0, 0}};
+    set_sign(&answer1, 1);
+    int result = negate(src_value1, &res_value1);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(answer1.bits[0], res_value1.bits[0]);   
+    ck_assert_int_eq(answer1.bits[1], res_value1.bits[1]);   
+    ck_assert_int_eq(answer1.bits[2], res_value1.bits[2]);   
+    ck_assert_int_eq(answer1.bits[3], res_value1.bits[3]);
+
+    decimal src_value2 = {{0b1111101000, 0, 0, 0}};
+    set_sign(&src_value2, 1);
+    decimal res_value2;
+    decimal answer2 = {{0b1111101000, 0, 0, 0}};
+    result = negate(src_value2, &res_value2);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(answer2.bits[0], res_value2.bits[0]);   
+    ck_assert_int_eq(answer2.bits[1], res_value2.bits[1]);   
+    ck_assert_int_eq(answer2.bits[2], res_value2.bits[2]);   
+    ck_assert_int_eq(answer2.bits[3], res_value2.bits[3]);   

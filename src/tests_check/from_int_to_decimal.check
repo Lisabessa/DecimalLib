@@ -1,0 +1,22 @@
+#test from_int_to_decimal_test
+    int src_value1 = 13468923;
+    decimal res_value1 = {0};
+    int result = from_int_to_decimal(src_value1, &res_value1);
+    ck_assert_int_eq(result, 0);
+    ck_assert_uint_eq(res_value1.bits[0], src_value1);
+    ck_assert_int_eq(res_value1.bits[1], 0);   
+    ck_assert_int_eq(res_value1.bits[2], 0);   
+    ck_assert_int_eq(res_value1.bits[3], 0);
+
+    int src_value2 = -2513654;
+    decimal res_value2 = {0};
+    result = from_int_to_decimal(src_value2, &res_value2);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(res_value2.bits[0], -src_value2);   
+    ck_assert_int_eq(res_value2.bits[1], 0);   
+    ck_assert_int_eq(res_value2.bits[2], 0);   
+    ck_assert_int_eq((res_value2.bits[3] >> 31 & 1), 1);
+
+    int src_value3 = 28765136;
+    result = from_int_to_decimal(src_value3, NULL);
+    ck_assert_int_eq(result, 1);

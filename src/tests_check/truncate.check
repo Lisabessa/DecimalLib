@@ -1,0 +1,11 @@
+#test truncate_test
+    decimal src_value1 = {{172333, 0, 0, 0}};
+    set_scale(&src_value1, 2);
+    decimal res_value1;
+    decimal answer1 = {{1723, 0, 0, 0}};
+    int result = truncate(src_value1, &res_value1);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(answer1.bits[0], res_value1.bits[0]);   
+    ck_assert_int_eq(answer1.bits[1], res_value1.bits[1]);   
+    ck_assert_int_eq(answer1.bits[2], res_value1.bits[2]);   
+    ck_assert_int_eq(answer1.bits[3], res_value1.bits[3]);

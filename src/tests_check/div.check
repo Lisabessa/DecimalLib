@@ -1,0 +1,49 @@
+#test div_test
+    decimal src_value1 = {{17, 0, 0, 0}};
+    decimal src_value2 = {{5, 0, 0, 0}};
+    decimal res_value1 = {{0, 0, 0, 0}};
+    decimal answer1 = {{34, 0, 0, 0}};
+    set_scale(&answer1, 1);
+    int result = div(src_value1, src_value2, &res_value1);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(answer1.bits[0], res_value1.bits[0]);
+    ck_assert_int_eq(answer1.bits[1], res_value1.bits[1]);
+    ck_assert_int_eq(answer1.bits[2], res_value1.bits[2]);
+    ck_assert_int_eq(answer1.bits[3], res_value1.bits[3]);
+
+    decimal src_value3 = {{123456u, 123u, 0, 0}};
+    decimal src_value4 = {{654321u, 654u, 0, 0}};
+    set_sign(&src_value4, 1);
+    set_scale(&src_value3, 2);
+    set_scale(&src_value4, 3);
+    decimal res_value2 = {{0, 0, 0, 0}};
+    decimal answer2 = {{375760970, 1102889849, 1019547915, -2145648640}};
+    result = div(src_value3, src_value4, &res_value2);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(answer2.bits[0], res_value2.bits[0]);
+    ck_assert_int_eq(answer2.bits[1], res_value2.bits[1]);
+    ck_assert_int_eq(answer2.bits[2], res_value2.bits[2]);
+    ck_assert_int_eq(answer2.bits[3], res_value2.bits[3]);
+
+    decimal src_value5 = {{0xffff, 34, 0, 0}};
+    decimal src_value6 =  {{0xff, 0, 0, 0}};
+    decimal res_value3 = {{0, 0, 0, 0}};
+    decimal answer3 = {{-932883115, 1079697637, -1190557321, 1310720}};
+    result = div(src_value5, src_value6, &res_value3);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(answer3.bits[0], res_value3.bits[0]);
+    ck_assert_int_eq(answer3.bits[1], res_value3.bits[1]);
+    ck_assert_int_eq(answer3.bits[2], res_value3.bits[2]);
+    ck_assert_int_eq(answer3.bits[3], res_value3.bits[3]);
+
+    decimal src_value7 = {{0xffffffff, 0xffffffff, 0xffffffff, 0}};
+    decimal src_value8 =  {{0xffffffff, 0xffffffff, 0xffffffff, 0}};
+    decimal res_value4 = {{0, 0, 0, 0}};
+    result = div(src_value7, src_value8, &res_value4);
+    ck_assert_int_eq(result, 1);
+
+    decimal src_value9 = {{63725, 1725, 0, 0}};
+    decimal src_value10 =  {{0, 0, 0, 0}};
+    decimal res_value5 = {{0, 0, 0, 0}};
+    result = div(src_value9, src_value10, &res_value5);
+    ck_assert_int_eq(result, 3);

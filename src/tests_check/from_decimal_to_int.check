@@ -1,0 +1,18 @@
+#test from_decimal_to_int_test
+    decimal src_value1 = {{0xffffffff, 0x3fff, 0, 0}};
+    int res_value1 = 0;
+    int result = from_decimal_to_int(src_value1, &res_value1);
+    ck_assert_int_eq(result, 1);
+    ck_assert_int_eq(res_value1, 0);
+
+    decimal src_value2 = {{0xe69, 0, 0, 0}};
+    set_sign(&src_value2, 1);
+    int res_value2 = 0;
+    src_value2.bits[3] = (src_value2.bits[3] & MINUS) | (2 << 16);
+    result = from_decimal_to_int(src_value2, &res_value2);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(res_value2, -36);
+
+    decimal src_value3 = {0};
+    result = from_decimal_to_int(src_value3, NULL);
+    ck_assert_int_eq(result, 1);

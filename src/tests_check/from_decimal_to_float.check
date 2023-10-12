@@ -1,0 +1,18 @@
+#test from_decimal_to_float_test
+    decimal src_value1 = {{0xffffffff, 0x3fff, 0, 0}};
+    float res_value1 = 0;
+    int result = from_decimal_to_float(src_value1, &res_value1);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(res_value1, 70368744177664.000000);
+
+    decimal src_value2 = {{12333459, 0, 0, 0}};
+    set_sign(&src_value2, 1);
+    set_scale(&src_value2, 8);
+    float res_value2 = 0;
+    result = from_decimal_to_float(src_value2, &res_value2);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(res_value2, (float)-0.1233346);
+
+    decimal src_value3 = {0};
+    result = from_decimal_to_float(src_value3, NULL);
+    ck_assert_int_eq(result, 1);

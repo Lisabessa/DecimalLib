@@ -1,0 +1,14 @@
+#test sub_test
+    decimal src_value1 = {{230304, 310398, 0, 0}};
+    decimal src_value2 = {{230304, 310398, 0, 0}};
+    set_scale(&src_value1, 3);
+    set_scale(&src_value2, 3);
+    decimal res_value1 = {{0, 0, 0, 0}};
+    decimal answer1 = {{0, 0, 0, 0}};
+    int result = sub(src_value1, src_value2, &res_value1);
+    ck_assert_int_eq(result, 0);
+     
+    ck_assert_int_eq(answer1.bits[0], res_value1.bits[0]);   
+    ck_assert_int_eq(answer1.bits[1], res_value1.bits[1]);   
+    ck_assert_int_eq(answer1.bits[2], res_value1.bits[2]);  
+    ck_assert_int_eq(answer1.bits[3], res_value1.bits[3]);

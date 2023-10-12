@@ -1,0 +1,42 @@
+#test from_float_to_decimal_test
+    float src_value1 = 555.1234;
+    decimal res_value1 = {0};
+    int result = from_float_to_decimal(src_value1, &res_value1);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(res_value1.bits[0], 5551234);
+    ck_assert_int_eq(res_value1.bits[1], 0);   
+    ck_assert_int_eq(res_value1.bits[2], 0);   
+    ck_assert_int_eq(get_scale(res_value1), 4);
+    ck_assert_int_eq(get_sign(res_value1), 0);
+
+    float src_value2 = -2513654;
+    decimal res_value2 = {0};
+    result = from_float_to_decimal(src_value2, &res_value2);
+    ck_assert_int_eq(result, 0);
+    ck_assert_int_eq(res_value2.bits[0], -src_value2);   
+    ck_assert_int_eq(res_value2.bits[1], 0);   
+    ck_assert_int_eq(res_value2.bits[2], 0);   
+    ck_assert_int_eq((res_value2.bits[3] >> 31 & 1), 1);
+
+    float src_value3 = 28765136;
+    result = from_float_to_decimal(src_value3, NULL);
+    ck_assert_int_eq(result, 1);
+
+    float src_value4 = pow(10, -29);
+    decimal res_value4 = {0};
+    result = from_float_to_decimal(src_value4, &res_value4);
+    ck_assert_int_eq(result, 1);
+    ck_assert_int_eq(res_value4.bits[0], 0);   
+    ck_assert_int_eq(res_value4.bits[1], 0);   
+    ck_assert_int_eq(res_value4.bits[2], 0);   
+    ck_assert_int_eq(res_value4.bits[3], 0);
+
+    float src_value5 = -pow(2, 97);
+    decimal res_value5 = {0};
+    result = from_float_to_decimal(src_value5, &res_value5);
+    ck_assert_int_eq(result, 1);
+    ck_assert_int_eq(res_value5.bits[0], -1);   
+    ck_assert_int_eq(res_value5.bits[1], -1);   
+    ck_assert_int_eq(res_value5.bits[2], -1);   
+    ck_assert_int_eq(res_value5.bits[3], -1);
+

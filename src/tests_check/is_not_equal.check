@@ -1,0 +1,5 @@
+#test is_not_equal_test
+    decimal src_value1 = {{17, 0, 0, 0}};
+    decimal src_value2 = {{5, 0, 0, 0}};
+    int result = is_not_equal(src_value1, src_value2);
+    ck_assert_int_eq(result, 1);

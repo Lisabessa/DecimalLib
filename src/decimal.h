@@ -71,8 +71,7 @@ int decimal_point_right(extended_decimal *src);
 int decimal_point_left(extended_decimal *src);
 int get_overflow(extended_decimal *src);
 int normalize_extended_decimal(extended_decimal *src);
-void addition_extended_decimal(extended_decimal value1,
-                               extended_decimal value2,
+void addition_extended_decimal(extended_decimal value1, extended_decimal value2,
                                extended_decimal *result);
 void subtraction_extended_decimal(extended_decimal value1,
                                   extended_decimal value2,
